@@ -1,0 +1,14 @@
+{% extends 'quiz/base.html'%}
+{% load static %}
+
+{% block title %}<h3>New theme</h3>{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'quiz:new_theme' %}">
+        {% csrf_token %}
+        <label for="theme">Theme:</label>
+        <input type="text" name="theme" id="theme" size="45" required><br>
+        <br>
+        <input type="submit" value="Register">
+    </form>
+{% endblock %}

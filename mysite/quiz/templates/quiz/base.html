@@ -1,0 +1,55 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Quiz</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'quiz/css/style.css' %}" />
+    </head>
+
+    <body>
+        {% block main_title %}
+        <h2>MakeAQuiz</h2>
+        {% endblock %}
+
+        {% block title %}{% endblock %}
+
+        {% block message %}
+        {% if error %}
+            <hr/>
+            <b class="erro">Error: {{ error }}</b>
+            <hr/>
+        {% endif %}
+
+        {% if msg %}
+            <hr/>
+            <b class="msg">{{ msg }}</b>
+            <hr/>
+        {% endif %}
+
+        {% endblock %}
+
+        {% block content %}
+
+        {% endblock %}
+
+        {% block menu %}
+        <hr/>
+        <a href="{% url 'quiz:index' %}">Home</a>
+        {% if user.is_authenticated %}
+            | Hey, <a href="{% url 'quiz:profile' %}">{{ user.username }}!</a>
+            | <a href="{% url 'logout' %}?next={% url 'quiz:index' %}">Logout</a>
+            | <a href="{% url 'quiz:new_quiz' %}">New Quiz</a>
+            | <a href="{% url 'quiz:new_question' %}">New Question</a>
+        {% else %}
+            | <a href="{% url 'login' %}?next={% url 'quiz:index' %}">Login</a>
+            <p> Login to access all functionalities.</p></p>
+
+        {% endif %}
+
+        {% block menu_itens %} {% endblock %}
+        {% endblock %}
+
+        <p>©Copyright Caio Batista</p>
+
+    </body>
+</html>

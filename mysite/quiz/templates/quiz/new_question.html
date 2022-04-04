@@ -1,0 +1,56 @@
+{% extends 'quiz/base.html'%}
+{% load static %}
+
+{% block title %}<h3>New question</h3>{% endblock %}
+
+{% block content %}
+    <p>*At least two options must be filled in.</p>
+    <form method="post" action="{% url 'quiz:new_question' %}">
+        {% csrf_token %}
+        <label for="text">Question:</label>
+        <input type="text" name="text" id="text" size="200" required><br>
+        <br>
+        <label for="op1">1st option:</label>
+        <input type="text" name="op1" id="op1" size="45" required><br>
+        <input type="radio" id="correct" name="correct" value="1">
+        <label for="correct">Correct option?</label><br>
+        <br>
+        <label for="op2">2st option:</label>
+        <input type="text" name="op2" id="op2" size="45" required><br>
+        <input type="radio" id="correct" name="correct" value="2">
+        <label for="correct">Correct option?</label><br>
+        <br>
+        <label for="op3">3st option:</label>
+        <input type="text" name="op3" id="op3" size="45"><br>
+        <input type="radio" id="correct" name="correct" value="3">
+        <label for="correct">Correct option?</label><br>
+        <br>
+        <label for="op4">4st option:</label>
+        <input type="text" name="op4" id="op4" size="45"><br>
+        <input type="radio" id="correct" name="correct" value="4">
+        <label for="correct">Correct option?</label><br>
+        <br>
+        <label for="op5">5st option:</label>
+        <input type="text" name="op5" id="op5" size="45"><br>
+        <input type="radio" id="correct" name="correct" value="5">
+        <label for="correct">Correct option?</label><br>
+        <br>
+        <label for="score">Score:</label>
+        <input type="number" name="score" id="score "min="1" required>
+        <br>
+        {% if themes %}
+        <p>Choose a theme:</p>
+            {% for theme in themes %}
+                <input type="radio" id="theme" name="theme" value="{{ theme.id }}">
+                <label for="theme">{{ theme }}</label><br>
+            {% endfor %}
+        {% else %}
+            <p>A theme must be registered before you can register a question.</p>
+        {% endif %}
+        <br>
+        <input type="submit" value="Register">
+    </form>
+
+    <a href="{% url 'quiz:new_theme' %}">Register new theme</a>
+
+{% endblock %}

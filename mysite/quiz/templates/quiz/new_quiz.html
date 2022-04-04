@@ -1,0 +1,30 @@
+{% extends 'quiz/base.html'%}
+{% load static %}
+
+{% block title %}<h3>New Quiz</h3>{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'quiz:new_quiz' %}">
+        {% csrf_token %}
+        {% if themes %}
+        <label for="text">Quiz title:</label>
+        <input type="text" name="text" id="text" size="50" required><br>
+        <p>Select questions for the quiz:</p>
+            {% for theme in themes %}
+                {% if theme.questions %}
+                    <h4>{{ theme }}:</h4>
+                    {% for questions in theme.questions %}
+                        <input type="checkbox" value="{{ question.id }}" name="{{ question.id }}" id="{{ question.id }}">
+                        <label for="{{ question.id }}">{{ question }}</label>
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>No questions has been registered yet.</p>
+        {% endif %}
+        <br>
+        <input type="submit" value="Register">
+    </form>
+
+{% endblock %}

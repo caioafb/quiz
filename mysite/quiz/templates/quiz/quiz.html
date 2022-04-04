@@ -1,0 +1,32 @@
+{% extends 'quiz/base.html'%}
+{% load static %}
+
+{% block title %}<h3>Quiz #{{ quiz.id }} - Created by <i>{{ quiz.author.user }}</i></h3>{% endblock %}
+
+{% block conteudo %}
+
+    <h2>{{ quiz }}</h2>
+    <form method="post" action="{% url 'quiz:quiz' quiz.id %}">
+        {% csrf_token %}
+        {% if quiz.questions %}
+            <ol type="1">
+            {% for question in quiz.questions %}
+                <li><h4>{{ question }}</h4></li>
+                <ol type="a">
+                {% for option in question.options %}
+                        <li>
+                            <input type="radio" id="{{ option.id }}" name="{{ question.id }}" value="{{ option.id }}">
+                            <label for="{{ option.id }}">{{ option }}</label><br>
+                        </li>
+                {% endfor %}
+                </ol>
+                <br>
+            {% endfor %}
+            </ol>
+        {% endif %}
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+
+{% endblock %}

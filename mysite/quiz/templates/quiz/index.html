@@ -1,0 +1,36 @@
+{% extends 'quiz/base.html'%}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+        <h3>Last quizzes</h3>
+        <p>Select a quiz to answer:</p>
+        {% if quizzes %}
+            <ul>
+            {% for quiz in quizzes %}
+                <li>
+                    <a href = "{% url 'quiz:quiz' quiz.id %}">{{ quiz }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No quiz has been registered yet...</p>
+        {% endif %}
+        <br>
+
+        <h3>Last results</h3>
+        {% if results %}
+            <ul>
+            {% for result in results %}
+                <li>
+                    {{ result.quiz }} - by <i>{{ result.userr.user.username }}</i>: {{ result.grade|floatformat:1}}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No quiz has been answered yet...</p>
+        {% endif %}
+        <br>
+
+{% endblock %}

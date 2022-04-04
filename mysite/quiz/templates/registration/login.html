@@ -1,0 +1,33 @@
+{% extends 'quiz/base.html'%}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    {% if form.errors %}
+        <p>Login and/or password invalid.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Please, login to acess this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Login:</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <input type="submit" value="Efetuar Login"/>
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+    <p>Not registered? <a href="{% url 'quiz:new_user' %}">Register.</a></p>
+{% endblock %}

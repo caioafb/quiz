@@ -25,15 +25,14 @@ SECRET_KEY = 'django-insecure-wbq=vyka(0cw3crjcv%q*ar+o+7w(c)o^8)(t$1*u8&kfh5s$u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['caiobatista.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'root.apps.RootConfig',
-    'simulado.apps.SimuladoConfig',
-    'enquetes.apps.EnquetesConfig',
+    'quiz.apps.QuizConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

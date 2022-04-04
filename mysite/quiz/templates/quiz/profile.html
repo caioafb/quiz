@@ -1,0 +1,17 @@
+{% extends 'quiz/base.html'%}
+{% load static %}
+
+{% block title %}<h3>User: {{ userr.user.first_name }} {{ userr.user.last_name }}</h3>{% endblock %}
+
+{% block content %}
+    <h3>Results:</h3>
+    {% if userr.results %}
+        <ul>
+        {% for result in userr.results %}
+                <li>{{result.quiz}} - Grade: {{result.grade|floatformat:1}}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No quiz has been answered yet.</p>
+    {% endif %}
+{% endblock %}

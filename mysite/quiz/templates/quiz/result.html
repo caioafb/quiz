@@ -1,0 +1,38 @@
+{% extends 'quiz/base.html'%}
+{% load static %}
+
+{% block title %}<h3>Result of the quiz: {{ quiz }}</h3>{% endblock %}
+
+{% block content %}
+
+    {% for question in quiz.questions %}
+        <h4>{{ question }}</h4>
+        <ol type="a">
+        {% for option in question.options %}
+            {% if option.id in answers and option.correct %}
+                <li>
+                    <font color="green">{{ option }}</font>
+                    <img src="{% static 'quiz/img/icon-yes.svg' %}" width="20" />
+                </li>
+            {% elif option.id in answers and not option.correct %}
+                <li>
+                    <font color="red">{{ option }}</font>
+                      <img src="{% static 'quiz/img/icon-no.svg' %}" width="20" />
+                </li>
+            {% elif option.correct %}
+                <li>
+                    <font color="green">{{ option }}</font>
+                </li>
+            {% else %}
+                <li>
+                    {{ option }}
+                </li>
+            {% endif %}
+        {% endfor %}
+        </ol>
+        <br>
+    {% endfor %}
+
+    <h2>Grade: {{ result|floatformat:1 }}</h2>
+
+{% endblock %}
