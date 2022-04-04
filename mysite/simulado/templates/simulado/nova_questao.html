@@ -1,0 +1,56 @@
+{% extends 'simulado/base.html'%}
+{% load static %}
+
+{% block titulo %}<h3>Nova questão</h3>{% endblock %}
+
+{% block conteudo %}
+    <p>*Pelo menos duas alternativas devem ser preenchidas.</p>
+    <form method="post" action="{% url 'simulado:nova_questao' %}">
+        {% csrf_token %}
+        <label for="texto">Texto da questão:</label>
+        <input type="text" name="texto" id="texto" size="200" required><br>
+        <br>
+        <label for="alt1">1ª alternativa:</label>
+        <input type="text" name="alt1" id="alt1" size="45" required><br>
+        <input type="radio" id="correta" name="correta" value="1">
+        <label for="correta">Opção correta?</label><br>
+        <br>
+        <label for="alt2">2ª alternativa:</label>
+        <input type="text" name="alt2" id="alt2" size="45" required><br>
+        <input type="radio" id="correta" name="correta" value="2">
+        <label for="correta">Opção correta?</label><br>
+        <br>
+        <label for="alt3">3ª alternativa:</label>
+        <input type="text" name="alt3" id="alt3" size="45"><br>
+        <input type="radio" id="correta" name="correta" value="3">
+        <label for="correta">Opção correta?</label><br>
+        <br>
+        <label for="alt4">4ª alternativa:</label>
+        <input type="text" name="alt4" id="alt4" size="45"><br>
+        <input type="radio" id="correta" name="correta" value="4">
+        <label for="correta">Opção correta?</label><br>
+        <br>
+        <label for="alt5">5ª alternativa:</label>
+        <input type="text" name="alt5" id="alt5" size="45"><br>
+        <input type="radio" id="correta" name="correta" value="5">
+        <label for="correta">Opção correta?</label><br>
+        <br>
+        <label for="score">Pontuação:</label>
+        <input type="number" name="score" id="score "min="1" required>
+        <br>
+        {% if temas %}
+        <p>Escolha um tema:</p>
+            {% for tema in temas %}
+                <input type="radio" id="tema" name="tema" value="{{ tema.id }}">
+                <label for="tema">{{ tema }}</label><br>
+            {% endfor %}
+        {% else %}
+            <p>Um tema precisa ser cadastrado para registrar uma pergunta.</p>
+        {% endif %}
+        <br>
+        <input type="submit" value="Registrar">
+    </form>
+
+    <a href="{% url 'simulado:novo_tema' %}">Cadastrar novo tema</a>
+
+{% endblock %}

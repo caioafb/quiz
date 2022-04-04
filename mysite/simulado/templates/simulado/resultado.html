@@ -1,0 +1,38 @@
+{% extends 'simulado/base.html'%}
+{% load static %}
+
+{% block titulo %}<h3>Resultado do Simulado: {{ simulado }}</h3>{% endblock %}
+
+{% block conteudo %}
+
+    {% for questao in simulado.questoes %}
+        <h4>{{ questao }}</h4>
+        <ol type="a">
+        {% for alternativa in questao.alternativas %}
+            {% if alternativa.id in respostas and alternativa.correta %}
+                <li>
+                    <font color="green">{{ alternativa }}</font>
+                    <img src="{% static 'simulado/img/icon-yes.svg' %}" width="20" />
+                </li>
+            {% elif alternativa.id in respostas and not alternativa.correta %}
+                <li>
+                    <font color="red">{{ alternativa }}</font>
+                      <img src="{% static 'simulado/img/icon-no.svg' %}" width="20" />
+                </li>
+            {% elif alternativa.correta %}
+                <li>
+                    <font color="green">{{ alternativa }}</font>
+                </li>
+            {% else %}
+                <li>
+                    {{ alternativa }}
+                </li>
+            {% endif %}
+        {% endfor %}
+        </ol>
+        <br>
+    {% endfor %}
+
+    <h2>Nota: {{ resultado|floatformat:1 }}</h2>
+
+{% endblock %}

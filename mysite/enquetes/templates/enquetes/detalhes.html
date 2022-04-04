@@ -1,0 +1,23 @@
+{% extends 'enquetes/base.html' %}
+{% load static %}
+
+{% block titulo%}<h3>Detalhes da Enquete #{{ pergunta.id }}</h3>{% endblock %}
+
+{% block conteudo %}
+        <h3>Enquete: {{ pergunta.texto | title }}</h3>
+        <p><b>Data de publicação:</b>
+        {{ pergunta.data_publicacao | date:"h:m, d/m/Y"}}</p>
+        <p><b>Escolha a opção desejada:</b></p>
+        <form method="post" action="{% url 'enquetes:votacao' pergunta.id %}">
+            {% csrf_token %}
+            <ul>
+                {% for opcao in pergunta.opcao_set.all %}
+                    <li>
+                        <input type="radio" name="opcao" id="opcao{{ forloop.counter }}" value="{{ opcao.id }}">
+                        <label for="opcao{{ forloop.counter }}"> {{ opcao.texto }} </label>
+                    </li>
+                {% endfor %}
+            </ul>
+            <input type="submit" value="Registre o seu voto">
+        </form>
+{% endblock %}

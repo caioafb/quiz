@@ -1,0 +1,22 @@
+{% extends 'enquetes/base.html' %}
+{% load static %}
+
+{% block titulo %}{% endblock %}
+
+{% block conteudo %}
+        <img src={% static 'enquetes/img/enquetebanner.jpg' %} width="200">
+
+        {% if ultimas_enquetes %}
+            <ul>
+                {% for pergunta in ultimas_enquetes %}
+                    <li><a href = "{% url 'enquetes:detalhes' pergunta.id %}">
+                        {{ pergunta.texto }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>Nenhuma enquete cadastrada até o momento.</h3>
+        {% endif %}
+{% endblock %}
+    </body>
+</html>

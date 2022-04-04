@@ -1,0 +1,30 @@
+{% extends 'simulado/base.html'%}
+{% load static %}
+
+{% block titulo %}<h3>Novo Simulado</h3>{% endblock %}
+
+{% block conteudo %}
+    <form method="post" action="{% url 'simulado:novo_simulado' %}">
+        {% csrf_token %}
+        {% if temas %}
+        <label for="texto">Título do simulado:</label>
+        <input type="text" name="texto" id="texto" size="50" required><br>
+        <p>Selecione questões para o simulado:</p>
+            {% for tema in temas %}
+                {% if tema.questoes %}
+                    <h4>{{ tema }}:</h4>
+                    {% for questao in tema.questoes %}
+                        <input type="checkbox" value="{{ questao.id }}" name="{{ questao.id }}" id="{{ questao.id }}">
+                        <label for="{{ questao.id }}">{{ questao }}</label>
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Nenhuma questão cadastrada ainda.</p>
+        {% endif %}
+        <br>
+        <input type="submit" value="Registrar">
+    </form>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+body {
+    background: white url("../img/background.jpeg");
+    background-size: cover;
+    text-align: center;
+}
+
+ul, li a, li label {
+    color: orange;
+    font-weight: bold;
+    list-style-type: none;
+}
+
+h1, h2, h3, p, label, a {
+    color: white;
+}
+
+.erro {
+    color: red;
+}

@@ -1,0 +1,14 @@
+{% extends 'simulado/base.html'%}
+{% load static %}
+
+{% block titulo %}<h3>Novo tema</h3>{% endblock %}
+
+{% block conteudo %}
+    <form method="post" action="{% url 'simulado:novo_tema' %}">
+        {% csrf_token %}
+        <label for="tema">Tema:</label>
+        <input type="text" name="tema" id="tema" size="45" required><br>
+        <br>
+        <input type="submit" value="Registrar">
+    </form>
+{% endblock %}

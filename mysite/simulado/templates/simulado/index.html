@@ -1,0 +1,36 @@
+{% extends 'simulado/base.html'%}
+{% load static %}
+
+{% block titulo %}{% endblock %}
+
+{% block conteudo %}
+        <h3>Últimos simulados</h3>
+        <p>Selecione um simulado para responder:</p>
+        {% if simulados %}
+            <ul>
+            {% for simulado in simulados %}
+                <li>
+                    <a href = "{% url 'simulado:simulado' simulado.id %}">{{ simulado }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhum simulado cadastrado ainda...</p>
+        {% endif %}
+        <br>
+
+        <h3>Últimos resultados</h3>
+        {% if resultados %}
+            <ul>
+            {% for resultado in resultados %}
+                <li>
+                    {{ resultado.simulado }} - por <i>{{ resultado.usuario.user.username }}</i>: {{ resultado.nota|floatformat:1}}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhum simulado respondido ainda...</p>
+        {% endif %}
+        <br>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'simulado/base.html'%}
+{% load static %}
+
+{% block titulo %}<h3>Simulado #{{ simulado.id }} - Criado por <i>{{ simulado.autor.user }}</i></h3>{% endblock %}
+
+{% block conteudo %}
+
+    <h2>{{ simulado }}</h2>
+    <form method="post" action="{% url 'simulado:simulado' simulado.id %}">
+        {% csrf_token %}
+        {% if simulado.questoes %}
+            <ol type="1">
+            {% for questao in simulado.questoes %}
+                <li><h4>{{ questao }}</h4></li>
+                <ol type="a">
+                {% for alternativa in questao.alternativas %}
+                        <li>
+                            <input type="radio" id="{{ alternativa.id }}" name="{{ questao.id }}" value="{{ alternativa.id }}">
+                            <label for="{{ alternativa.id }}">{{ alternativa }}</label><br>
+                        </li>
+                {% endfor %}
+                </ol>
+                <br>
+            {% endfor %}
+            </ol>
+        {% endif %}
+        <br>
+        <input type="submit" value="Responder">
+    </form>
+
+
+{% endblock %}

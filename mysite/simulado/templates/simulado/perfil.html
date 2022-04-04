@@ -1,0 +1,17 @@
+{% extends 'simulado/base.html'%}
+{% load static %}
+
+{% block titulo %}<h3>Usuário: {{ usuario.user.first_name }} {{ usuario.user.last_name }}</h3>{% endblock %}
+
+{% block conteudo %}
+    <h3>Resultados:</h3>
+    {% if usuario.resultados %}
+        <ul>
+        {% for resultado in usuario.resultados %}
+                <li>{{resultado.simulado}} - Nota: {{resultado.nota|floatformat:1}}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum simulado respondido ainda.</p>
+    {% endif %}
+{% endblock %}

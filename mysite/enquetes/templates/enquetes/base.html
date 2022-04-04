@@ -1,0 +1,39 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>App Enquetes</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'enquetes/css/style.css' %}" />
+    </head>
+
+    <body>
+        {% block titulo_principal %}
+        <h1>Aplicação Enquetes - DSWeb 2021.2</h1>
+        {% endblock %}
+
+        {% block titulo %}{% endblock %}
+
+        {% block mensagem_de_erro %}
+        {% if erro %}
+            <hr/>
+            <b class="erro">Erro: {{ erro }}</b>
+            <hr/>
+        {% endif %}
+        {% endblock %}
+
+        {% block conteudo %}
+
+        {% endblock %}
+
+        {% block menu %}
+        <a href="{% url 'enquetes:index' %}">Página principal</a>
+        <form method="get" action="{% url 'enquetes:cadastro' %}">
+            <input type="submit" value="Cadastrar nova enquete">
+        </form>
+        {% block itens_de_menu %} {% endblock %}
+        {% endblock %}
+        <br/>
+        <p>©Copyright Caio Batista</p>
+
+    </body>
+</html>

@@ -1,0 +1,55 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Projeto da Disciplina - Módulo 2</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'simulado/css/style.css' %}" />
+    </head>
+
+    <body>
+        {% block titulo_principal %}
+        <h2>Simulado - DSWeb 2021.2</h2>
+        {% endblock %}
+
+        {% block titulo %}{% endblock %}
+
+        {% block mensagem %}
+        {% if erro %}
+            <hr/>
+            <b class="erro">Erro: {{ erro }}</b>
+            <hr/>
+        {% endif %}
+
+        {% if msg %}
+            <hr/>
+            <b class="msg">{{ msg }}</b>
+            <hr/>
+        {% endif %}
+
+        {% endblock %}
+
+        {% block conteudo %}
+
+        {% endblock %}
+
+        {% block menu %}
+        <hr/>
+        <a href="{% url 'simulado:index' %}">Home</a>
+        {% if user.is_authenticated %}
+            | Olá, <a href="{% url 'simulado:perfil' %}">{{ user.username }}!</a>
+            | <a href="{% url 'logout' %}?next={% url 'simulado:index' %}">Logout</a>
+            | <a href="{% url 'simulado:novo_simulado' %}">Novo Simulado</a>
+            | <a href="{% url 'simulado:nova_questao' %}">Nova Questão</a>
+        {% else %}
+            | <a href="{% url 'login' %}?next={% url 'simulado:index' %}">Login</a>
+            <p> Faça o login para acessar as funcionalidades.</p></p>
+
+        {% endif %}
+
+        {% block itens_de_menu %} {% endblock %}
+        {% endblock %}
+
+        <p>©Copyright Caio Batista</p>
+
+    </body>
+</html>

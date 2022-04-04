@@ -1,0 +1,33 @@
+{% extends 'simulado/base.html'%}
+{% load static %}
+
+{% block titulo %}{% endblock %}
+
+{% block conteudo %}
+    {% if form.errors %}
+        <p>Login e/ou senha inválidos.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Por favor, faça login para acessar essa página.</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Login:</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>Senha:</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <input type="submit" value="Efetuar Login"/>
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+    <p>Ainda não tem cadastro? <a href="{% url 'simulado:novo_usuario' %}">Cadastre-se.</a></p>
+{% endblock %}
